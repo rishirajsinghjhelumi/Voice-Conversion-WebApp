@@ -8,5 +8,6 @@
 ../bin/pip install zope.sqlalchemy
 ../bin/pip install waitress
 ../bin/pip install MySQL-python
+../bin/pip install pyramid_chameleon
   
 exit 0
