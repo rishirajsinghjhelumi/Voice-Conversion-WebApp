@@ -15,12 +15,12 @@ class Paragraph(Base):
 
     def __init__(self, text):
 
-    	self.text = text
+        self.text = text
 
     def getJSON(self):
 
-    	jsonDict = {}
-    	jsonDict['id'] = self.id
-    	jsonDict['text'] = self.text
+        jsonDict = {}
+        jsonDict['id'] = self.id
+        jsonDict['text'] = self.text
 
-    	return jsonDict
+        return jsonDict
