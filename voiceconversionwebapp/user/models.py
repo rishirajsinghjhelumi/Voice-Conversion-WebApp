@@ -85,3 +85,30 @@ class UserParagraph(Base):
         jsonDict['paragraph_id'] = self.paragraph_id
 
         return jsonDict
+
+class UserConvertedSpeech(Base):
+
+    __tablename__ = 'user_converted_speeches'
+
+    id = Column(Integer,primary_key=True)
+    user_id = Column(Integer,ForeignKey('users.id'),default = 1)
+    #user = relationship("User",foreign_keys=[user_id])
+    user_converted_id = Column(Integer,ForeignKey('users.id'),default = 1)
+    #user_converted = relationship("User",foreign_keys=[user_converted_id])
+    speech_file = Column(String(4096))
+
+    def __init__(self, user_id, user_converted_id, speech_file):
+
+        self.user_id = user_id
+        self.user_converted_id = user_converted_id
+        self.speech_file = speech_file
+
+    def getJSON(self):
+
+        jsonDict = {}
+        jsonDict['id'] = self.id
+        jsonDict['user_id'] = self.user_id
+        jsonDict['user_converted_id'] = self.user_converted_id
+        jsonDict['speech_file'] = self.speech_file
+
+        return jsonDict
