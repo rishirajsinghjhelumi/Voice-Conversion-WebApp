@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS
 
 
 CREATE TABLE IF NOT EXISTS 
-`trained_couple` (
+`trained_couples` (
 	`id` int(11) AUTO_INCREMENT,
 	`user1_id` int(11),
 	`user2_id` int(11),
