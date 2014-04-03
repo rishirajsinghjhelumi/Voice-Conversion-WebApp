@@ -56,3 +56,15 @@ CREATE TABLE IF NOT EXISTS
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1; 
 
+
+
+CREATE TABLE IF NOT EXISTS
+`user_converted_speeches` (
+	`id` int(11) AUTO_INCREMENT,
+	`user_id` int(11),
+	`user_converted_id` int(11),
+	`speech_file` varchar(4096),
+	FOREIGN KEY (`user_id`) REFERENCES users(`id`),
+	FOREIGN KEY (`user_converted_id`) REFERENCES users(`id`),
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
