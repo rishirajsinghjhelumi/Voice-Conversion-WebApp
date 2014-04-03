@@ -20,14 +20,14 @@ class TrainedCouple(Base):
 
     def __init__(self, user1_id, user2_id):
 
-    	self.user1_id = user1_id
-    	self.user2_id = user2_id
+		self.user1_id = user1_id
+		self.user2_id = user2_id
 
     def getJSON(self):
 
-    	jsonDict = {}
-    	jsonDict['id'] = self.id
-    	jsonDict['user1_id'] = self.user1_id
-    	jsonDict['user2_id'] = self.user2_id
+		jsonDict = {}
+		jsonDict['id'] = self.id
+		jsonDict['user1_id'] = self.user1_id
+		jsonDict['user2_id'] = self.user2_id
 
-    	return jsonDict
+		return jsonDict
