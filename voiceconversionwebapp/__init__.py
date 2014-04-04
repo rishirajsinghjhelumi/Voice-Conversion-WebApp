@@ -53,6 +53,7 @@ def main(global_config, **settings):
 
     config.add_static_view('static', 'static')
     config.add_static_view('attachment',os.path.join(here, 'static/attachments'))
+    config.add_static_view('user_data',os.path.join(here, 'static/user_data'))
     config.add_static_view('css',os.path.join(here, 'static/css'))
     config.add_static_view('js',os.path.join(here, 'static/js'))
     config.include('pyramid_chameleon')

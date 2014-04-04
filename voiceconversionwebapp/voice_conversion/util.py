@@ -24,9 +24,11 @@ def initUserDirectories(userId):
 	
 	userDirectory = 'static/user_data/user_%s'%(userId)
 	wavDirectory = os.path.join(userDirectory, 'wav')
+	convertedSpeechDirectory = os.path.join(userDirectory, 'converted')
 
 	makeDirectory(userDirectory)
 	makeDirectory(wavDirectory)
+	makeDirectory(convertedSpeechDirectory)
 
 def getUserWavDirectory(userId):
 
