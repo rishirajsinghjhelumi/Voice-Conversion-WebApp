@@ -10,6 +10,9 @@ from .models import DBSession
 from .models import TrainedCouple
 from ..user.models import User, UserParagraph, UserProperty
 
+def trainCouple(user1, user2):
+	pass
+
 @view_config(
 	route_name='trainWith',
 	renderer='json',
@@ -41,7 +44,7 @@ def trainWith(request):
 	if userTrainingComplete == False:
 		return {'status' : 'The other user has not yet completed training!!!!'}
 
-	# train_couple(currentUser, userId) #TODO
+	# trainCouple(currentUser, userId) #TODO
 
 	trainedCouple = TrainedCouple(currentUser, userId)
 	DBSession.add(trainedCouple)

@@ -11,6 +11,8 @@ from .models import Paragraph
 from ..user.models import User, UserParagraph, UserProperty
 from .models import NUM_PARAGRAPHS
 
+from ..voice_conversion.util import saveUserParagraph
+
 @view_config(
 	route_name='paragraphs',
 	renderer='json',
@@ -62,7 +64,8 @@ def userParagraphUpdate(request):
 	if userParagraph:
 		return {'status' : 'false'}
 
-	# saveUserParagrph(request) # TODO
+	speechFile = request.POST['speech_file']
+	saveUserParagraph(currentUser, paragraphId, speechFile)
 
 	userParagraph = UserParagraph(currentUser, paragraphId)
 	DBSession.add(userParagraph)
