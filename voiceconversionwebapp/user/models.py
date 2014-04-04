@@ -41,7 +41,7 @@ class UserProperty(Base):
 
     id = Column(Integer,primary_key=True)
     user_id = Column(Integer,ForeignKey('users.id'),default = 1)
-    #user = relationship("User",foreign_keys=[user_id])
+    user = relationship("User",foreign_keys=[user_id])
 
     completed_training = Column(Boolean)
     paragraph_read_count = Column(Integer)

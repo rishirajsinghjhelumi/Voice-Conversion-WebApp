@@ -82,3 +82,23 @@ def logout(request):
     request.session.invalidate()
 
     return HTTPFound(location = request.route_url('home'), headers = headers)
+
+
+@view_config(
+	route_name='getAllTrainedUsers',
+	renderer='json',
+	request_method='GET'
+)
+def getAllTrainedUsers(request):
+
+	currentUser = int(authenticated_userid(request))
+
+	query = DBSession.query(UserProperty.user).\
+	filter(UserProperty.completed_training == True).\
+	filter(UserProperty.user_id != currentUser)
+
+	users = []
+	for user in query.all():
+		users.append(user.getJSON())
+
+	return {'users' : users}

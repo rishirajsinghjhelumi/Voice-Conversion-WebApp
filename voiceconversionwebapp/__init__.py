@@ -13,6 +13,20 @@ from .models import (
     Base,
     )
 
+from pyramid.request import Request
+from pyramid.request import Response
+
+def request_factory(environ):
+    request = Request(environ)
+    request.response = Response()
+    request.response.headerlist = []
+    request.response.headerlist.extend(
+        (
+            ('Access-Control-Allow-Origin', '*'),
+        )
+    )
+    return request
+
 here = os.path.dirname(os.path.abspath(__file__))
 log = logging.getLogger(__name__)
 
@@ -35,6 +49,8 @@ def main(global_config, **settings):
     config.set_authorization_policy(authz_policy)
     config.set_default_permission(Authenticated)
 
+    config.set_request_factory(request_factory) # REMOVE IT
+
     config.add_static_view('static', 'static')
     config.add_static_view('attachment',os.path.join(here, 'static/attachments'))
     config.add_static_view('css',os.path.join(here, 'static/css'))
@@ -54,6 +70,9 @@ def main(global_config, **settings):
     config.add_route('paragraphs','/paragraphs')
     config.add_route('userParagraphs','/user/paragraphs')
     config.add_route('userParagraphUpdate','/user/paragraphs/update')
+
+    config.add_route('getAllTrainedUsers','/get_all_trained_users')
+    config.add_route('getUsersTrainedWith','/get_users_trained_with')
     
     config.scan()
     return config.make_wsgi_app()
