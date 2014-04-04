@@ -10,8 +10,7 @@ from .models import DBSession
 from .models import TrainedCouple
 from ..user.models import User, UserParagraph, UserProperty
 
-def trainCouple(user1, user2):
-	pass
+from ..voice_conversion.util import trainCouple
 
 @view_config(
 	route_name='trainWith',

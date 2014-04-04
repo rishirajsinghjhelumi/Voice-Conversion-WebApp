@@ -34,3 +34,6 @@ def getUserWavDirectory(userId):
 	wavDirectory = os.path.join(userDirectory, 'wav')
 
 	return wavDirectory
+
+def trainCouple(user1Id, user2Id):
+	pass
