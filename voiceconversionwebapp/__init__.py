@@ -49,11 +49,10 @@ def main(global_config, **settings):
     config.set_authorization_policy(authz_policy)
     config.set_default_permission(Authenticated)
 
-    config.set_request_factory(request_factory) # REMOVE IT
+    # config.set_request_factory(request_factory) # REMOVE IT
 
     config.add_static_view('static', 'static')
     config.add_static_view('attachment',os.path.join(here, 'static/attachments'))
-    config.add_static_view('user_data',os.path.join(here, 'static/user_data'))
     config.add_static_view('css',os.path.join(here, 'static/css'))
     config.add_static_view('js',os.path.join(here, 'static/js'))
     config.include('pyramid_chameleon')
@@ -61,8 +60,11 @@ def main(global_config, **settings):
 
     """ Routes Here """
     config.add_route('home', '/')
-    config.add_route('profile', '/profile')
     config.add_route('about', '/about')
+    config.add_route('help', '/help')
+
+    config.add_route('profile', '/profile')
+    config.add_route('training', '/training')
     
     config.add_route('register', '/register')
     config.add_route('login', '/login')

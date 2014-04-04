@@ -7,7 +7,7 @@ from models import DBSession
 
 @view_config(route_name='home',renderer='index.mako', permission='__no_permission_required__')
 def homeView(request):
-    return {'rishi' : ['rishi','gora']}
+    return {}
 
 
 @view_config(route_name='home',effective_principals=[Authenticated], renderer='dashboard.mako')
@@ -20,14 +20,25 @@ def profile(request):
     return {}
 
 
+@view_config(route_name='training',renderer='training.mako')
+def training(request):
+    return {}
+
+
 @view_config(route_name='about',renderer='about.mako',permission='__no_permission_required__')
 def about(request):
+    return {}
+
+
+@view_config(route_name='help',renderer='help.mako',permission='__no_permission_required__')
+def help(request):
     return {}
 
 
 @forbidden_view_config()
 def forbidden(request):
     return Response('Not Allowed')
+
 
 @view_config(context='pyramid.exceptions.NotFound', renderer='json', permission='__no_permission_required__')
 def notFound_view(request):

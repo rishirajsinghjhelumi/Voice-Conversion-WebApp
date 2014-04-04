@@ -6,7 +6,7 @@ def makeDirectory(directory):
 
 def saveUserParagraph(userId, paragraphId, speechFile):
 	
-	file_path = "static/user_data/user_%s/wav/paragraph_%s.wav"%(userId, paragraphId)
+	file_path = "user_data/user_%s/wav/paragraph_%s.wav"%(userId, paragraphId)
 	input_file = speechFile.file
 
 	output_file = open(file_path, 'wb')
@@ -22,7 +22,7 @@ def saveUserParagraph(userId, paragraphId, speechFile):
 
 def initUserDirectories(userId):
 	
-	userDirectory = 'static/user_data/user_%s'%(userId)
+	userDirectory = 'user_data/user_%s'%(userId)
 	wavDirectory = os.path.join(userDirectory, 'wav')
 	convertedSpeechDirectory = os.path.join(userDirectory, 'converted')
 
