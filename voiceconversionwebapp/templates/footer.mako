@@ -4,13 +4,13 @@
 <!-- Footer starts -->
 <div id="footer">
 	<div class="info-footer">
-		<form action="/" style="display:inline">
+		<form action="/help" style="display:inline">
 			<button class="primary" value=>Help</button>
 		</form> &nbsp; &nbsp;  
 		<form action="/about" style="display:inline">
 			<button class="info">About</button>
 		</form> &nbsp; &nbsp;
-		<form action="/help" style="display:inline">
+		<form action="/" style="display:inline">
 			<button class="default">Home</button>
 		</form>
 	</div>
