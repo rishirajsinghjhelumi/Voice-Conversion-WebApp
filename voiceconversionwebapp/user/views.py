@@ -8,6 +8,7 @@ import hashlib
 
 from .models import DBSession
 from .models import User, UserProperty
+from ..training.models import TrainedCouple
 
 from sqlalchemy import and_
 
@@ -98,6 +99,30 @@ def getAllTrainedUsers(request):
 	filter(UserProperty.user_id != currentUser)
 
 	users = []
+	for user in query.all():
+		users.append(user.getJSON())
+
+	return {'users' : users}
+
+@view_config(
+	route_name='getUsersTrainedWith',
+	renderer='json',
+	request_method='GET'
+)
+def getUsersTrainedWith(request):
+
+	currentUser = int(authenticated_userid(request))
+
+	query = DBSession.query(TrainedCouple.user1).\
+	filter(TrainedCouple.user2_id == currentUser)
+
+	users = []
+	for user in query.all():
+		users.append(user.getJSON())
+
+	query = DBSession.query(TrainedCouple.user2).\
+	filter(TrainedCouple.user1_id == currentUser)
+	
 	for user in query.all():
 		users.append(user.getJSON())
 

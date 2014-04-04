@@ -14,9 +14,9 @@ class TrainedCouple(Base):
 
     id = Column(Integer,primary_key=True)
     user1_id = Column(Integer,ForeignKey('users.id'),default = 1)
-    #user1 = relationship("User",foreign_keys=[user1_id])
+    user1 = relationship("User",foreign_keys=[user1_id])
     user2_id = Column(Integer,ForeignKey('users.id'),default = 1)
-    #user2 = relationship("User",foreign_keys=[user2_id])
+    user2 = relationship("User",foreign_keys=[user2_id])
 
     def __init__(self, user1_id, user2_id):
 
