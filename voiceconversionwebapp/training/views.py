@@ -45,8 +45,6 @@ def trainWith(request):
 
 	trainedCouple = TrainedCouple(currentUser, userId)
 	DBSession.add(trainedCouple)
-	trainedCouple = TrainedCouple(userId, currentUser)
-	DBSession.add(trainedCouple)
 	DBSession.flush()
 
 	return {'status' : 'Training Complete'}
