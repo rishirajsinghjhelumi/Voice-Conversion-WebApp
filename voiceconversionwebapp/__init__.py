@@ -73,6 +73,8 @@ def main(global_config, **settings):
 
     config.add_route('getAllTrainedUsers','/get_all_trained_users')
     config.add_route('getUsersTrainedWith','/get_users_trained_with')
+
+    config.add_route('trainWith','/train_with/{user_id}')
     
     config.scan()
     return config.make_wsgi_app()
