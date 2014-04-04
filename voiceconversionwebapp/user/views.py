@@ -10,12 +10,11 @@ from .models import DBSession
 from .models import User, UserProperty
 from ..training.models import TrainedCouple
 
+from ..voice_conversion.util import initUserDirectories
+
 from sqlalchemy import and_
 
 _DEFAULT_PROFILE_PIC = ""
-
-def initUserDirectories():
-	pass
 
 @view_config(
 	route_name='register',
@@ -42,7 +41,7 @@ def register(request):
 	DBSession.add(userProperty)
 	DBSession.flush()
 
-	initUserDirectories()
+	initUserDirectories(dbFoundUser.id)
 
 	request.session['user'] = dbFoundUser.getJSON()
 	headers = remember(request, dbFoundUser.id)
