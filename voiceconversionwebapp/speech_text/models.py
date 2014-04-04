@@ -6,6 +6,8 @@ from sqlalchemy.types import String
 from sqlalchemy.schema import ForeignKey
 from sqlalchemy.orm import relationship
 
+NUM_PARAGRAPHS = 40
+
 class Paragraph(Base):
 
     __tablename__ = 'paragraphs'
