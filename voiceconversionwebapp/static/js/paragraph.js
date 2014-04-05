@@ -60,10 +60,14 @@
  			var paragraph_id = this.paragraphs[i]["id"];
  			var li_class = "list_paragraph_unread";
  			var self = this;
+ 			var paragraphText = this.paragraphs[i]["text"];
+ 			if(paragraphText.length > 25)
+ 				paragraphText = paragraphText.substring(0, 25);
+ 			paragraphText += "...";
 
  			if(this.readParagraphs.indexOf(paragraph_id) > -1)
  				li_class = "list_paragraph_read";
- 			$("#paragraphs").append('<li class="{1}" id="paragraph_{0}">Paragraph {0}</li>'.format(paragraph_id, li_class));
+ 			$("#paragraphs").append('<li class="{1}" id="paragraph_{0}">{2}</li>'.format(paragraph_id, li_class, paragraphText));
 
  			$('#paragraph_' + paragraph_id).click(function() {
 

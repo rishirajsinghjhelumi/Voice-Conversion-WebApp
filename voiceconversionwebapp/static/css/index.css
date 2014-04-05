@@ -143,7 +143,6 @@ body {
 
 .list_paragraph_unread {
 	padding: 10px 10px 5px 10px;
-	text-align: center;
 	font-size: 17px;
 	background: #c0392b;
 }
@@ -176,7 +175,6 @@ li.list_paragraph_read:active {
 
 .list_paragraph_read {
 	padding: 10px 10px 5px 10px;
-	text-align: center;
 	font-size: 17px;
 	background-color: #27ae60;
 }
