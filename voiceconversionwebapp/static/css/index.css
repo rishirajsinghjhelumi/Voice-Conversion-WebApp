@@ -133,7 +133,12 @@ body {
 
 #users_completed_training {
 	overflow: auto;
-	/*height: 359px;*/
+	height: inherit;
+}
+
+#get_users_trained_with {
+	overflow: auto;
+	height: inherit;
 }
 
 .list_paragraph_unread {
@@ -190,6 +195,26 @@ li.users_completed_training:active {
 }
 
 .users_completed_training {
+	padding: 10px 10px 5px 10px;
+	text-align: center;
+	font-size: 17px;
+	background-color: #27ae60;
+}
+
+li.get_users_trained_with:hover {
+	background:#0B610B;
+	color: #ffffff;
+}
+
+li.get_users_trained_with:active {
+	background: grey;
+	color: #ffffff;
+	outline: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+.get_users_trained_with {
 	padding: 10px 10px 5px 10px;
 	text-align: center;
 	font-size: 17px;

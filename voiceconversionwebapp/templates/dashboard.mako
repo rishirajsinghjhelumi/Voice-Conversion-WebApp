@@ -5,6 +5,7 @@
 	<div class="row" style="display:flex;">
 		<div class="span5">
 			<div class="accordion" data-role="accordion">
+
 			    <div class="accordion-frame">
 			        <a href="#" class="heading">Completed Training</a>
 			        <div class="content">
@@ -18,16 +19,20 @@
 			    <div class="accordion-frame">
 			        <a href="#" class="heading">Users Trained With</a>
 			        <div class="content">
-			        	<ul id="users_trained_with" >						    
-						</ul>
+				        <nav class="sidebar (light)">
+				        	<ul id="users_trained_with" >						    
+							</ul>
+				        </nav>
 			        </div>
 			    </div>
 
 			    <div class="accordion-frame">
 			        <a href="#" class="heading">Converted Voices</a>
 			        <div class="content">
-			        	<ul id="converted voices" >						    
-						</ul>
+				        <nav class="sidebar (light)">
+				        	<ul id="converted voices" >						    
+							</ul>
+						</nav>
 			        </div>
 			    </div>
 			</div>
