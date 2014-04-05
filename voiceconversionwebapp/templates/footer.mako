@@ -18,7 +18,3 @@
 		&copy; Voice Conversion 2014
 	</div>
 </div>
-
-
-</body>
-</html>

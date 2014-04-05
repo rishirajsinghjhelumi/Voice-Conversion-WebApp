@@ -10,8 +10,9 @@
 				</ul>						  
 			</nav>
 		</div>
+		<span id="time">0:00</span>
 		<div id='text-display'>
-			<div class="notice marker-on-left" id="notice-text-default">
+			<div class="notice marker-on-left span11" id="notice-text-default">
 				Please Choose a Paragraph. 
 			</div>
 		</div>
@@ -19,4 +20,12 @@
 </div>
 
 <%include file="footer.mako"/>
+<script src="static/js/recorder.js"></script>
 <script src="static/js/paragraph.js"></script>
+
+<script>
+
+</script>
+
+</body>
+</html>
