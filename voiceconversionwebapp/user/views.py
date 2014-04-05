@@ -93,13 +93,13 @@ def getAllTrainedUsers(request):
 
 	currentUser = int(authenticated_userid(request))
 
-	query = DBSession.query(UserProperty.user).\
+	query = DBSession.query(UserProperty).\
 	filter(UserProperty.completed_training == True).\
 	filter(UserProperty.user_id != currentUser)
 
 	users = []
-	for user in query.all():
-		users.append(user.getJSON())
+	for userProperty in query.all():
+		users.append(userProperty.user.getJSON())
 
 	return {'users' : users}
 
