@@ -1,89 +1,69 @@
- var VC = new Object();
- VC['read_paragraphs'] = [];
+ if (!String.prototype.format) {
+ 	String.prototype.format = function() {
+ 		var args = arguments;
+ 		return this.replace(/{(\d+)}/g, function(match, number) { 
+ 			return typeof args[number] != 'undefined'
+ 			? args[number]
+ 			: match
+ 			;
+ 		});
+ 	};
+ }
+
  var BASE_URL = "";
 
- function timecode(ms) {
- 	var hms = {
- 		h: Math.floor(ms/(60*60*1000)),
- 		m: Math.floor((ms/60000) % 60),
- 		s: Math.floor((ms/1000) % 60)
+ var VC = function(){
+
+ 	this.initialize = function(){
+ 		Recorder.initialize({
+ 			swfSrc: "static/recorder.swf"
+ 		});
+ 		this.get_user_read_paragraphs();
+ 		this.get_paragraphs();
+ 		this.initParagraphList();
  	};
- 	var tc = [];
 
- 	if (hms.h > 0) {
- 		tc.push(hms.h);
- 	}
+ 	this.get_paragraphs = function (){
 
- 	tc.push((hms.m < 10 && hms.h > 0 ? "0" + hms.m : hms.m));
- 	tc.push((hms.s < 10  ? "0" + hms.s : hms.s));
+ 		var paragraph_url = BASE_URL + "/paragraphs";
 
- 	return tc.join(':');
- };
-
- function record(){
- 	Recorder.record({
- 		start: function(){
- 		},
- 		progress: function(milliseconds){
- 			document.getElementById("time").innerHTML = timecode(milliseconds);
- 		}
- 	});
- };
-
- function play(){
- 	Recorder.stop();
- 	Recorder.play({
- 		progress: function(milliseconds){
- 			document.getElementById("time").innerHTML = timecode(milliseconds);
- 		}
- 	});
- };
-
- function stop(){
- 	Recorder.stop();
- };
-
- function upload(paragraph_id){
-
- 	Recorder.upload({
- 		url:"/user/paragraphs/update",
- 		audioParam: "speech_file",
- 		params: {
- 			'paragraph_id' : paragraph_id
- 		},
- 		success: function(data){
+ 		$.ajax({
+ 			url: paragraph_url,
+ 			type: 'GET',
+ 			async:false,
+ 		}).done(function(data) {		
  			if( typeof data === 'string')
  				data = JSON.parse(data);
- 			if(data['status'] == 'true'){
- 				$('#paragraph_' + paragraph_id).attr('class', 'list_paragraph_read');
- 			}
- 		}
- 	});
- };
- 
- var get_paragraphs = function (){
+ 			this.paragraphs = data['paragraphs'];
+ 		}.bind(this),"json");
+ 	};
 
- 	var paragraph_url = BASE_URL + "/paragraphs";
+ 	this.get_user_read_paragraphs = function(){
 
- 	$.ajax({
- 		url: paragraph_url,
- 		type: 'GET',
- 		async:false,
- 	}).done(function(data) {		
- 		if( typeof data === 'string')
- 			data = JSON.parse(data);
- 		var paragraphs = data['paragraphs'];
+ 		var user_read_paragraphs_url = BASE_URL + "/user/paragraphs";
 
- 		for (var i = 0; i < paragraphs.length; i++) {
- 			var paragraph_id = paragraphs[i]["id"];
- 			if(VC['read_paragraphs'].indexOf(paragraph_id) > -1){
- 				$("#paragraphs").append( '<li class="list_paragraph_read" id="paragraph_' + paragraph_id + 
- 					'"> Paragraph ' + paragraph_id + '</li>' );
- 			}
- 			else{
- 				$("#paragraphs").append( '<li class="list_paragraph_unread" id="paragraph_' + paragraph_id +
- 					'"> Paragraph ' + paragraph_id + '</li>' );
- 			}
+ 		$.ajax({
+ 			url: user_read_paragraphs_url,
+ 			type: 'GET',
+ 			async:false,
+ 		}).done(function(data) {
+ 			if( typeof data === 'string')
+ 				data = JSON.parse(data);
+ 			this.readParagraphs = data['paragraphs'];
+ 		}.bind(this),"json");
+ 	};
+
+ 	this.initParagraphList = function(){
+
+ 		for (var i = 0; i < this.paragraphs.length; i++) {
+
+ 			var paragraph_id = this.paragraphs[i]["id"];
+ 			var li_class = "list_paragraph_unread";
+ 			var self = this;
+
+ 			if(this.readParagraphs.indexOf(paragraph_id) > -1)
+ 				li_class = "list_paragraph_read";
+ 			$("#paragraphs").append('<li class="{1}" id="paragraph_{0}">Paragraph {0}</li>'.format(paragraph_id, li_class));
 
  			$('#paragraph_' + paragraph_id).click(function() {
 
@@ -92,8 +72,10 @@
  				$('#text-display').append('<div class="span11" id="text-paragraphs"></div>');
 
  				var paragraph_id = $(this).attr('id').split("paragraph_")[1];
- 				$("#text-paragraphs").append('<div class="notice marker-on-left" id="notice-text">' 
- 					+ paragraphs[paragraph_id - 1]["text"]
+
+ 				$("#text-paragraphs").append(
+ 					'<div class="notice marker-on-left" id="notice-text">' 
+ 					+ self.paragraphs[paragraph_id - 1]["text"]
  					+ '</div> ' 
  					+ '<button id="record-button"> Record </button> ' 
  					+ '<button id="stop-button"> Stop </button> ' 
@@ -101,45 +83,88 @@
  				);
 
  				$('#record-button').click(function(){
-					record();
-				});
+ 					self._record();
+ 				});
 
  				$('#stop-button').click(function(){
-					stop();
-				});	
+ 					self._stop();
+ 				});	
 
  				$('#send-button').click(function(){
-					upload(paragraph_id);
-				});	
+ 					self._upload(paragraph_id);
+ 				});	
 
  			});
  		}
+ 	};
 
- 	},"json");
-};
+ 	this._timecode = function(ms) {
+ 		var hms = {
+ 			h: Math.floor(ms/(60*60*1000)),
+ 			m: Math.floor((ms/60000) % 60),
+ 			s: Math.floor((ms/1000) % 60)
+ 		};
+ 		var tc = [];
 
-var get_user_read_paragraphs = function(){
+ 		if (hms.h > 0) {
+ 			tc.push(hms.h);
+ 		}
 
-	var user_read_paragraphs_url = BASE_URL + "/user/paragraphs";
+ 		tc.push((hms.m < 10 && hms.h > 0 ? "0" + hms.m : hms.m));
+ 		tc.push((hms.s < 10  ? "0" + hms.s : hms.s));
 
-	$.ajax({
-		url: user_read_paragraphs_url,
-		type: 'GET',
-		async:false,
-	}).done(function(data) {
-		if( typeof data === 'string')
-			data = JSON.parse(data);
-		VC['read_paragraphs'] = data['paragraphs'];
-	},"json");
-};
+ 		return tc.join(':');
+ 	};
 
-$(document).ready(function() {
+ 	this._record = function() {
+ 		Recorder.record({
+ 			start: function(){
+ 			},
+ 			progress: function(milliseconds){
+ 				document.getElementById("time").innerHTML = this._timecode(milliseconds);
+ 			}.bind(this)
+ 		});
+ 	};
 
-	Recorder.initialize({
-		swfSrc: "static/recorder.swf"
-	});
+ 	this._play = function() {
+ 		Recorder.stop();
+ 		Recorder.play({
+ 			progress: function(milliseconds){
+ 				document.getElementById("time").innerHTML = this._timecode(milliseconds);
+ 			}.bind(this)
+ 		});
+ 	};
 
-	get_user_read_paragraphs();
-	get_paragraphs();
+ 	this._stop = function() {
+ 		Recorder.stop();
+ 	};
 
-});
+ 	this._upload = function(paragraph_id) {
+
+ 		Recorder.upload({
+ 			url:"/user/paragraphs/update",
+ 			audioParam: "speech_file",
+ 			params: {
+ 				'paragraph_id' : paragraph_id
+ 			},
+ 			success: function(data){
+ 				if( typeof data === 'string')
+ 					data = JSON.parse(data);
+ 				if(data['status'] == 'true'){
+ 					$('#paragraph_' + paragraph_id).attr('class', 'list_paragraph_read');
+ 				}
+ 				else{
+ 					alert('Something went wrong. Please Try Again.')
+ 				}
+ 			}
+ 		});
+ 	};
+
+ };
+
+ $(document).ready(function() {
+
+ 	var voiceConversion = new VC();
+ 	voiceConversion.initialize();
+
+ });
