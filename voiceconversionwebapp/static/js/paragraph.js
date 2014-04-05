@@ -50,6 +50,7 @@
  			if( typeof data === 'string')
  				data = JSON.parse(data);
  			this.readParagraphs = data['paragraphs'];
+ 			this.readParagraphs.sort(function(a,b){return a-b});
  		}.bind(this),"json");
  	};
 
@@ -92,6 +93,8 @@
 
  				$('#send-button').click(function(){
  					self._upload(paragraph_id);
+ 					var nextUnreadParagraphId = self._getNextUnreadParagraphId();
+ 					$('#paragraph_' + nextUnreadParagraphId).click();
  				});	
 
  			});
@@ -141,6 +144,8 @@
 
  	this._upload = function(paragraph_id) {
 
+ 		paragraph_id = parseInt(paragraph_id);
+
  		Recorder.upload({
  			url:"/user/paragraphs/update",
  			audioParam: "speech_file",
@@ -152,12 +157,23 @@
  					data = JSON.parse(data);
  				if(data['status'] == 'true'){
  					$('#paragraph_' + paragraph_id).attr('class', 'list_paragraph_read');
+ 					this.readParagraphs.push(paragraph_id);
+ 					this.readParagraphs.sort(function(a,b){return a-b});
  				}
  				else{
- 					alert('Something went wrong. Please Try Again.')
+ 					alert(data['status']);
  				}
- 			}
+ 			}.bind(this)
  		});
+ 	};
+
+ 	this._getNextUnreadParagraphId = function() {
+ 		var j = 0;
+ 		for(var i=1; i <= this.paragraphs.length ; i++){
+ 			if(this.readParagraphs[j] != i)
+ 				return i;
+ 			j++;
+ 		}
  	};
 
  };
