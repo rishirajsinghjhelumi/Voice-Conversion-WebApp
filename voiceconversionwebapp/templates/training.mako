@@ -10,7 +10,6 @@
 				</ul>						  
 			</nav>
 		</div>
-		<span id="time">0:00</span>
 		<div id='text-display'>
 			<div class="notice marker-on-left span11" id="notice-text-default">
 				Please Choose a Paragraph. 

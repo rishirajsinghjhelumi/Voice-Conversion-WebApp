@@ -75,11 +75,13 @@
  				var paragraph_id = $(this).attr('id').split("paragraph_")[1];
 
  				$("#text-paragraphs").append(
- 					'<div class="notice marker-on-left" id="notice-text">' 
+ 					'<div class="notice marker-on-left" id="notice-text">'
  					+ self.paragraphs[paragraph_id - 1]["text"]
- 					+ '</div> ' 
- 					+ '<button id="record-button"> Record </button> ' 
- 					+ '<button id="stop-button"> Stop </button> ' 
+ 					+ '<br/> <span id="time" style="color:black;">0:00</span>'
+ 					+ '</div>'
+ 					+ '<button id="record-button"> Record </button>'
+ 					+ '<button id="stop-button"> Stop </button>'
+ 					+ '<button id="play-button"> Play </button>' 
  					+ '<button id="send-button"> Send </button>'
  				);
 
@@ -89,6 +91,10 @@
 
  				$('#stop-button').click(function(){
  					self._stop();
+ 				});
+
+ 				$('#play-button').click(function(){
+ 					self._play();
  				});	
 
  				$('#send-button').click(function(){
@@ -168,12 +174,14 @@
  	};
 
  	this._getNextUnreadParagraphId = function() {
- 		var j = 0;
- 		for(var i=1; i <= this.paragraphs.length ; i++){
- 			if(this.readParagraphs[j] != i)
- 				return i;
+ 		var j = 1;
+ 		for(var i=0; i <= this.readParagraphs.length ; i++){
+ 			console.log(j + " : : " + this.readParagraphs[i]);
+ 			if(this.readParagraphs[i] != j)
+ 				return j + 1;
  			j++;
  		}
+ 		return j;
  	};
 
  };
