@@ -261,7 +261,7 @@ li.users_completed_training:active {
 #record-button {
 	position: relative !important;
 	vertical-align: top !important;
-	width: 33% !important;
+	width: 25% !important;
 	height: 60px !important;
 	padding: 0 !important;
 	font-size: 22px !important;
@@ -286,7 +286,7 @@ li.users_completed_training:active {
 #stop-button {
 	position: relative !important;
 	vertical-align: top !important;
-	width: 33% !important;
+	width: 25% !important;
 	height: 60px !important;
 	padding: 0 !important;
 	font-size: 22px !important;
@@ -311,7 +311,7 @@ li.users_completed_training:active {
 #send-button {
 	position: relative !important;
 	vertical-align: top !important;
-	width: 33% !important;
+	width: 25% !important;
 	height: 60px !important;
 	padding: 0 !important;
 	font-size: 22px !important;
@@ -327,6 +327,31 @@ li.users_completed_training:active {
 }
 
 #send-button:active {
+	top: 1px !important;
+	outline: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+#play-button {
+	position: relative !important;
+	vertical-align: top !important;
+	width: 25% !important;
+	height: 60px !important;
+	padding: 0 !important;
+	font-size: 22px !important;
+	color: white !important;
+	text-align: center !important;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+	background: grey !important;
+	border: 0 !important;
+	border-bottom: 2px solid #28be68 !important;
+	cursor: pointer !important;
+	-webkit-box-shadow: inset 0 -2px #28be68 !important;
+	box-shadow: inset 0 -2px #28be68 !important;
+}
+
+#play-button:active {
 	top: 1px !important;
 	outline: none !important;
 	-webkit-box-shadow: none !important;

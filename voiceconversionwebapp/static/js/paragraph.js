@@ -50,7 +50,6 @@
  			if( typeof data === 'string')
  				data = JSON.parse(data);
  			this.readParagraphs = data['paragraphs'];
- 			this.readParagraphs.sort(function(a,b){return a-b});
  		}.bind(this),"json");
  	};
 
@@ -99,8 +98,9 @@
 
  				$('#send-button').click(function(){
  					self._upload(paragraph_id);
- 					var nextUnreadParagraphId = self._getNextUnreadParagraphId();
- 					$('#paragraph_' + nextUnreadParagraphId).click();
+					self.readParagraphs.push(parseInt(paragraph_id));
+					var nextUnreadParagraphId = self._getNextUnreadParagraphId();
+					$('#paragraph_' + nextUnreadParagraphId).click();
  				});	
 
  			});
@@ -163,8 +163,6 @@
  					data = JSON.parse(data);
  				if(data['status'] == 'true'){
  					$('#paragraph_' + paragraph_id).attr('class', 'list_paragraph_read');
- 					this.readParagraphs.push(paragraph_id);
- 					this.readParagraphs.sort(function(a,b){return a-b});
  				}
  				else{
  					alert(data['status']);
@@ -174,14 +172,11 @@
  	};
 
  	this._getNextUnreadParagraphId = function() {
- 		var j = 1;
- 		for(var i=0; i <= this.readParagraphs.length ; i++){
- 			console.log(j + " : : " + this.readParagraphs[i]);
- 			if(this.readParagraphs[i] != j)
- 				return j + 1;
- 			j++;
+ 		for(var i=1; i <= this.paragraphs.length ; i++){
+ 			if(this.readParagraphs.indexOf(i) == -1)
+ 				return i;
  		}
- 		return j;
+ 		return -1;
  	};
 
  };
