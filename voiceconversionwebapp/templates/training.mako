@@ -11,8 +11,8 @@
 				</ul>						  
 			</nav>
 		</div>
-		<div id='text-display'>
-			<div class="notice marker-on-left span11" id="notice-text-default">
+		<div id='text-display' class="span11">
+			<div class="notice marker-on-left" id="notice-text-default">
 				Please Choose a Paragraph. 
 			</div>
 		</div>

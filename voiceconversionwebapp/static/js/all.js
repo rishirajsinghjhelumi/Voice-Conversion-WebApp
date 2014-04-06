@@ -75,7 +75,7 @@ var VC = function(){
 
 				$('#text-paragraphs').remove();
 				$('#notice-text-default').remove();
-				$('#text-display').append('<div class="span11" id="text-paragraphs"></div>');
+				$('#text-display').append('<div id="text-paragraphs"></div>');
 
 				var paragraph_id = $(this).attr('id').split("paragraph_")[1];
 
@@ -218,7 +218,7 @@ this.get_all_trained_users = function(){
 
 				$('#text-users').remove();
 				$('#notice-info-default').remove();
-				$('#text-display').append('<div class="span10" id="text-users"></div>');
+				$('#text-display').append('<div id="text-users"></div>');
 
 				var user_id = $(this).attr('id').split("completed_user_")[1];
 				var user_obj = $.grep(users, function(e){ return e.id == user_id; })[0];
@@ -257,7 +257,7 @@ this.get_users_trained_with = function(){
 
 				$('#text-users').remove();
 				$('#notice-info-default').remove();
-				$('#text-display').append('<div class="span10" id="text-users"></div>');
+				$('#text-display').append('<div id="text-users"></div>');
 
 				var user_id = $(this).attr('id').split("trained_user_")[1];
 				var user_obj = $.grep(users, function(e){ return e.id == user_id; })[0];

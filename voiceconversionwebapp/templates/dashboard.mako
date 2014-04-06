@@ -10,7 +10,7 @@
 			        <a href="#" class="heading">Completed Training</a>
 			        <div class="content">
 			        	<nav class="sidebar (light)">
-				        	<ul id="users_completed_training" >						    
+				        	<ul id="users_completed_training" class="accordian-list" >						    
 							</ul>
 						</nav>
 			        </div>
@@ -20,7 +20,7 @@
 			        <a href="#" class="heading">Users Trained With</a>
 			        <div class="content">
 				        <nav class="sidebar (light)">
-				        	<ul id="users_trained_with" >						    
+				        	<ul id="users_trained_with"  class="accordian-list">						    
 							</ul>
 				        </nav>
 			        </div>
@@ -30,15 +30,15 @@
 			        <a href="#" class="heading">Converted Voices</a>
 			        <div class="content">
 				        <nav class="sidebar (light)">
-				        	<ul id="converted voices" >						    
+				        	<ul id="converted voices" class="accordian-list" >						    
 							</ul>
 						</nav>
 			        </div>
 			    </div>
 			</div>
 		</div>
-		<span id="empty">     </span>
-		<div id='text-display'>
+		
+		<div id='text-display' class="span11">
 			<div class="notice marker-on-left span10" id="notice-info-default">
 				Please Choose a Paragraph. 
 			</div>

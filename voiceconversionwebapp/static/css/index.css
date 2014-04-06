@@ -346,3 +346,10 @@ li.users_trained_with:active {
 #play-button:active {
 	background: #FFBF00 !important;
 }
+
+.accordian-list {
+	overflow: scroll !important;
+	overflow-x: initial !important;
+	height: 215px !important;
+	background: white !important;
+}
