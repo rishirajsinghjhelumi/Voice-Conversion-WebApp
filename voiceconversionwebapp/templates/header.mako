@@ -23,11 +23,13 @@
 						<div class="span12">
 							<div class="heading" style="position:relative;padding-top:12px;font-size:55px;">Voice Conversion</div>
 						</div>
+						% if 'user' in request.session:
 						<div class="span1" id="logout-button" style="padding-top:20px;">
 							<form action="/logout" style="display:inline">
 								<button class="default large">Logout</button>
 							</form>
 						</div>
+						% endif
 					</div>
 				</div>
 			</nav>
