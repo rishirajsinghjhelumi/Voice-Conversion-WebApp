@@ -112,11 +112,11 @@ def getUsersTrainedWith(request):
 
 	currentUser = int(authenticated_userid(request))
 
-	query = DBSession.query(TrainedCouple.user2).\
+	trainedCouples = DBSession.query(TrainedCouple).\
 	filter(TrainedCouple.user1_id == currentUser)
 
 	users = []
-	for user in query.all():
-		users.append(user.getJSON())
+	for trainedCouple in trainedCouples.all():
+		users.append(trainedCouple.user2.getJSON())
 
 	return {'users' : users}
