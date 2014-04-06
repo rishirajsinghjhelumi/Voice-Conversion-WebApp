@@ -14,7 +14,7 @@ from ..voice_conversion.util import initUserDirectories
 
 from sqlalchemy import and_
 
-_DEFAULT_PROFILE_PIC = ""
+_DEFAULT_PROFILE_PIC = "static/img/profile_pic.jpg"
 
 @view_config(
 	route_name='register',
