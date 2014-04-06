@@ -46,12 +46,15 @@
 	</div>
 </div>
 
-<%include file="footer.mako"/>		
-
-<script src="static/js/users.js"></script>
+<%include file="footer.mako"/>
 
 <script>
+$(document).ready(function() {
 
+	var voiceConversion = new VC();
+	voiceConversion.initializeUsers();
+
+});
 </script>
 
 </body>

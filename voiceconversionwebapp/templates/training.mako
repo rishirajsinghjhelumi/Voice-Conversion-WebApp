@@ -20,10 +20,14 @@
 </div>
 
 <%include file="footer.mako"/>
-<script src="static/js/recorder.js"></script>
-<script src="static/js/paragraph.js"></script>
 
 <script>
+$(document).ready(function() {
+
+	var voiceConversion = new VC();
+	voiceConversion.initializeParagraphs();
+
+});
 
 </script>
 

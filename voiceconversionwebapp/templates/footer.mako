@@ -5,7 +5,7 @@
 <div id="footer">
 	<div class="info-footer">
 		<form action="/help" style="display:inline">
-			<button class="primary" value=>Help</button>
+			<button class="primary">Help</button>
 		</form> &nbsp; &nbsp;  
 		<form action="/about" style="display:inline">
 			<button class="info">About</button>
