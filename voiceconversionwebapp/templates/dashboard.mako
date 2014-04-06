@@ -41,6 +41,7 @@
 		<div id='text-display'>
 			<div class="notice marker-on-left span10" id="notice-info-default">
 				Please Choose a Paragraph. 
+			</div>
 		</div>
 	</div>
 </div>
