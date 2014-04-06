@@ -4,6 +4,7 @@ from pyramid.security import remember,authenticated_userid, forget, Authenticate
 from pyramid.httpexceptions import HTTPFound
 
 from models import DBSession
+from user.models import User
 
 @view_config(route_name='home',renderer='index.mako', permission='__no_permission_required__')
 def homeView(request):
@@ -12,27 +13,35 @@ def homeView(request):
 
 @view_config(route_name='home',effective_principals=[Authenticated], renderer='dashboard.mako')
 def dashboard(request):
-    return {}
+
+	currentUser = int(authenticated_userid(request))
+
+	if 'user' not in request.session:
+		user = DBSession.query(User).\
+		filter(User.id == currentUser).\
+		first()
+		request.session['user'] = user.getJSON()
+	return {}
 
 
 @view_config(route_name='profile',renderer='profile.mako')
 def profile(request):
-    return {}
+	return {}
 
 
 @view_config(route_name='training',renderer='training.mako')
 def training(request):
-    return {}
+	return {}
 
 
 @view_config(route_name='about',renderer='about.mako',permission='__no_permission_required__')
 def about(request):
-    return {}
+	return {}
 
 
 @view_config(route_name='help',renderer='help.mako',permission='__no_permission_required__')
 def help(request):
-    return {}
+	return {}
 
 
 @forbidden_view_config()
