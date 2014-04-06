@@ -296,105 +296,53 @@ li.get_users_trained_with:active {
 }
 
 #record-button {
-	position: relative !important;
-	vertical-align: top !important;
 	width: 25% !important;
-	height: 60px !important;
-	padding: 0 !important;
-	font-size: 22px !important;
-	color: white !important;
-	text-align: center !important;
-	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+	font-weight: bold !important;
 	background: #088A08 !important;
-	border: 0 !important;
 	border-bottom: 2px solid #088A08 !important;
-	cursor: pointer !important;
 	-webkit-box-shadow: inset 0 -2px #088A08 !important;
 	box-shadow: inset 0 -2px #088A08 !important;
 }
 
 #record-button:active {
-	top: 1px !important;
-	outline: none !important;
 	background: #04B404 !important;
-	-webkit-box-shadow: none !important;
-	box-shadow: none !important;
 }
 
 #stop-button {
-	position: relative !important;
-	vertical-align: top !important;
 	width: 25% !important;
-	height: 60px !important;
-	padding: 0 !important;
-	font-size: 22px !important;
-	color: white !important;
-	text-align: center !important;
-	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+	font-weight: bold !important;
 	background: #8A0808 !important;
-	border: 0 !important;
 	border-bottom: 2px solid #8A0808 !important;
-	cursor: pointer !important;
 	-webkit-box-shadow: inset 0 -2px #8A0808 !important;
 	box-shadow: inset 0 -2px #8A0808 !important;
 }
 
 #stop-button:active {
-	top: 1px !important;
-	outline: none !important;
 	background: #DF0101 !important;
-	-webkit-box-shadow: none !important;
-	box-shadow: none !important;
 }
 
 #send-button {
-	position: relative !important;
-	vertical-align: top !important;
 	width: 25% !important;
-	height: 60px !important;
-	padding: 0 !important;
-	font-size: 22px !important;
-	color: white !important;
-	text-align: center !important;
-	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+	font-weight: bold !important;
 	background: #2E2EFE !important;
-	border: 0 !important;
 	border-bottom: 2px solid #2E2EFE !important;
-	cursor: pointer !important;
 	-webkit-box-shadow: inset 0 -2px #2E2EFE !important;
 	box-shadow: inset 0 -2px #2E2EFE !important;
 }
 
 #send-button:active {
-	top: 1px !important;
-	outline: none !important;
 	background: #0040FF!important;
-	-webkit-box-shadow: none !important;
-	box-shadow: none !important;
 }
 
 #play-button {
-	position: relative !important;
-	vertical-align: top !important;
 	width: 25% !important;
-	height: 60px !important;
-	padding: 0 !important;
-	font-size: 22px !important;
-	color: white !important;
-	text-align: center !important;
-	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+	font-weight: bold !important;
 	background: #B18904 !important;
-	border: 0 !important;
 	border-bottom: 2px solid #B18904 !important;
-	cursor: pointer !important;
 	-webkit-box-shadow: inset 0 -2px #B18904 !important;
 	box-shadow: inset 0 -2px #B18904 !important;
 }
 
 #play-button:active {
-	top: 1px !important;
-	outline: none !important;
 	background: #FFBF00 !important;
-	-webkit-box-shadow: none !important;
-	box-shadow: none !important;
 }

@@ -82,10 +82,10 @@
  					+ self.paragraphs[paragraph_id - 1]["text"]
  					+ '<br/> <span id="time" style="color:black;font-size: xx-large;">0:00</span>'
  					+ '</div>'
- 					+ '<button id="record-button"> Record </button>'
- 					+ '<button id="stop-button"> Stop </button>'
- 					+ '<button id="play-button"> Play </button>' 
- 					+ '<button id="send-button"> Send </button>'
+ 					+ '<button id="record-button" class="emerald-flat-button"> Record </button>'
+ 					+ '<button id="stop-button" class="emerald-flat-button"> Stop </button>'
+ 					+ '<button id="play-button" class="emerald-flat-button"> Play </button>' 
+ 					+ '<button id="send-button" class="emerald-flat-button"> Send </button>'
  				);
 
  				$('#record-button').click(function(){
