@@ -104,6 +104,10 @@
  					self._upload(paragraph_id);
 					self.readParagraphs.push(parseInt(paragraph_id));
 					var nextUnreadParagraphId = self._getNextUnreadParagraphId();
+					if(nextUnreadParagraphId == -1){
+						alert('Training Complete');
+						window.location.href = '/';
+					}
 					$('#paragraph_' + nextUnreadParagraphId).click();
  				});	
 
