@@ -79,7 +79,7 @@ def main(global_config, **settings):
     config.add_route('getConvertedSpeeches','/get_converted_speeches')
 
     config.add_route('trainWith','/train_with')
-    config.add_route('convertVoice','convert_voice')
+    config.add_route('convertVoice','/convert_voice')
     
     config.scan()
     return config.make_wsgi_app()
