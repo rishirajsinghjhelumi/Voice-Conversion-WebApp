@@ -8,9 +8,9 @@ from sqlalchemy import and_
 
 from .models import DBSession
 from .models import TrainedCouple
-from ..user.models import User, UserParagraph, UserProperty
+from ..user.models import User, UserParagraph, UserProperty, UserConvertedSpeech
 
-from ..voice_conversion.util import trainCouple
+from ..voice_conversion.util import trainCouple, convertUserVoiceToAnother
 
 @view_config(
 	route_name='trainWith',
@@ -50,3 +50,24 @@ def trainWith(request):
 	DBSession.flush()
 
 	return {'status' : 'Training Complete'}
+
+
+@view_config(
+	route_name='convertVoice',
+	renderer='json',
+	request_method='POST'
+)
+def convertVoice(request):
+
+	currentUser = int(authenticated_userid(request))
+
+	userConvertedId = request.POST['user_converted_id']
+	speechFile = request.POST['speech_file']
+
+	speechFileLocation = convertUserVoiceToAnother(currentUser, userConvertedId, speechFile)
+
+	userConvertedSpeech = UserConvertedSpeech(currentUser, userConvertedId, speechFileLocation)
+	DBSession.add(userConvertedSpeech)
+	DBSession.flush()
+
+	return {'converted_speech' : userConvertedSpeech.getJSON()}

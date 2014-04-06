@@ -39,3 +39,6 @@ def getUserWavDirectory(userId):
 
 def trainCouple(user1Id, user2Id):
 	pass
+
+def convertUserVoiceToAnother(user1Id, user2Id, speechFile):
+	pass
