@@ -94,7 +94,7 @@ class UserConvertedSpeech(Base):
     user_id = Column(Integer,ForeignKey('users.id'),default = 1)
     #user = relationship("User",foreign_keys=[user_id])
     user_converted_id = Column(Integer,ForeignKey('users.id'),default = 1)
-    #user_converted = relationship("User",foreign_keys=[user_converted_id])
+    user_converted = relationship("User",foreign_keys=[user_converted_id])
     speech_file = Column(String(4096))
 
     def __init__(self, user_id, user_converted_id, speech_file):
@@ -107,8 +107,7 @@ class UserConvertedSpeech(Base):
 
         jsonDict = {}
         jsonDict['id'] = self.id
-        jsonDict['user_id'] = self.user_id
-        jsonDict['user_converted_id'] = self.user_converted_id
+        jsonDict['user_converted'] = self.user_converted.getJSON()
         jsonDict['speech_file'] = self.speech_file
 
         return jsonDict

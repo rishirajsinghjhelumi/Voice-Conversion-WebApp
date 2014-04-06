@@ -7,7 +7,7 @@ from pyramid.httpexceptions import HTTPFound
 import hashlib
 
 from .models import DBSession
-from .models import User, UserProperty
+from .models import User, UserProperty, UserConvertedSpeech
 from ..training.models import TrainedCouple
 
 from ..voice_conversion.util import initUserDirectories
@@ -120,3 +120,21 @@ def getUsersTrainedWith(request):
 		users.append(trainedCouple.user2.getJSON())
 
 	return {'users' : users}
+
+@view_config(
+	route_name='getConvertedSpeeches',
+	renderer='json',
+	request_method='GET'
+)
+def getConvertedSpeeches(request):
+
+	currentUser = int(authenticated_userid(request))
+
+	convertedSpeeches = DBSession.query(UserConvertedSpeech).\
+	filter(UserConvertedSpeech.user_id == currentUser)
+
+	speeches = []
+	for convertedSpeech in convertedSpeeches:
+		speeches.append(convertedSpeech.getJSON())
+
+	return {'speeches' : speeches}
