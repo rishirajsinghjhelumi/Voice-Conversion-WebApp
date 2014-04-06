@@ -15,12 +15,12 @@ from ..voice_conversion.util import trainCouple, convertUserVoiceToAnother
 @view_config(
 	route_name='trainWith',
 	renderer='json',
-	request_method='GET'
+	request_method='POST'
 )
 def trainWith(request):
 
 	currentUser = int(authenticated_userid(request))
-	userId = int(request.matchdict['user_id'])
+	userId = int(request.POST['user_id'])
 
 	trained = DBSession.query(TrainedCouple).\
 	filter(and_(TrainedCouple.user1_id == currentUser, TrainedCouple.user2_id == userId)).\
@@ -43,7 +43,7 @@ def trainWith(request):
 	if userTrainingComplete == False:
 		return {'status' : 'The other user has not yet completed training!!!!'}
 
-	# trainCouple(currentUser, userId) #TODO
+	trainCouple(currentUser, userId)
 
 	trainedCouple = TrainedCouple(currentUser, userId)
 	DBSession.add(trainedCouple)
@@ -61,7 +61,7 @@ def convertVoice(request):
 
 	currentUser = int(authenticated_userid(request))
 
-	userConvertedId = request.POST['user_converted_id']
+	userConvertedId = int(request.POST['user_converted_id'])
 	speechFile = request.POST['speech_file']
 
 	speechFileLocation = convertUserVoiceToAnother(currentUser, userConvertedId, speechFile)
