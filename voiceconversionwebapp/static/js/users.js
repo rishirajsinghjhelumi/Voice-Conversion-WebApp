@@ -27,13 +27,18 @@ var get_all_trained_users = function(){
  				$('#text-display').append('<div class="span10" id="text-users"></div>');
  				
  				var user_id = $(this).attr('id').split("user_")[1];
+
+ 				// console.log(users);
+ 				var user_obj = $.grep(users, function(e){ return e.id == user_id; });
+ 				// console.log(result[0]);
+
  				$("#text-users").append('<div class="notice marker-on-left" id="notice-info">' 
- 					+ '<img src="' + users[user_id - 1]["profile_pic"]  + '" class="rounded span2">'
+ 					+ '<div id="img-info"><img src="' + user_obj[0]["profile_pic"]  + '" class="rounded span2"></div>'
  					+ '<div>'
- 					+ users[user_id - 1]["name"]
+ 					+ user_obj[0]["name"]
  					+ '</div>'
  					+ '<div>'
- 					+ users[user_id - 1]["email"]
+ 					+ user_obj[0]["email"]
  					+ '</div> ' 
  					+ '</div> ' 
  				);
@@ -64,7 +69,7 @@ var get_users_trained_with = function(){
 					'"> User ' + user_id + '</li>' );
 			
 			$('#user_' + user_id).click(function() {
-				
+
 				$('#text-users').remove();
  				$('#notice-info-default').remove();
  				$('#text-display').append('<div class="span10" id="text-users"></div>');

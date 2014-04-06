@@ -46,6 +46,7 @@
 </div>
 
 <%include file="footer.mako"/>		
+
 <script src="static/js/users.js"></script>
 
 <script>

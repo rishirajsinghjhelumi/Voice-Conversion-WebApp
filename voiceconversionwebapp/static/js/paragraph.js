@@ -76,7 +76,7 @@
  				$("#text-paragraphs").append(
  					'<div class="notice marker-on-left" id="notice-text">'
  					+ self.paragraphs[paragraph_id - 1]["text"]
- 					+ '<br/> <span id="time" style="color:black;">0:00</span>'
+ 					+ '<br/> <span id="time" style="color:black;font-size: xx-large;">0:00</span>'
  					+ '</div>'
  					+ '<button id="record-button"> Record </button>'
  					+ '<button id="stop-button"> Stop </button>'
