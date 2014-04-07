@@ -229,6 +229,7 @@ this.get_all_trained_users = function(){
 					+ '<div> {1} </div>'
 					+ '<div> {2} </div> ' 
 					+ '</div> ').format(user_obj['profile_pic'],user_obj['name'],user_obj['email'])
+					+ '<button id="train-button" class="emerald-flat-button"> Start Training </button>'
 					);
 			});
 		}
@@ -268,7 +269,25 @@ this.get_users_trained_with = function(){
 					+ '<div> {1} </div>'
 					+ '<div> {2} </div> ' 
 					+ '</div> ').format(user_obj['profile_pic'],user_obj['name'],user_obj['email'])
+					+ '<div id="all-buttons">'
+					+ '<button id="record-button" class="emerald-flat-button"> Record </button>'
+					+ '<button id="stop-button" class="emerald-flat-button"> Stop </button>'
+					+ '<button id="play-button" class="emerald-flat-button"> Play </button>' 
+					+ '<button id="convert-button" class="emerald-flat-button"> Convert </button>'
+					+ '</div>'
 					);
+
+				$('#convert-button').click(function(){
+					$('#all-buttons').remove();
+					$('#text-users').append(
+						('<div id="audio-player">'
+						+ '<audio controls="controls">'
+						+ '<source src="{0}" type="audio/wav">'
+						+ 'Your browser does not support audio format.'
+						+ '</audio>'
+						+ '</div>').format("")
+					);
+				});	
 			});
 		}
 
