@@ -200,6 +200,7 @@ this.initializeUsers = function(){
 this.get_all_trained_users = function(){
 
 	var users_url = BASE_URL + "/get_all_trained_users";
+	var self = this;
 
 	$.ajax({
 		url: users_url,
@@ -225,16 +226,55 @@ this.get_all_trained_users = function(){
 
 				$("#text-users").append(
 					('<div class="notice marker-on-left" id="notice-info">' 
-					+ '<div id="img-info"><img src="{0}" class="rounded span2"></div>'
-					+ '<div> {1} </div>'
-					+ '<div> {2} </div> ' 
-					+ '</div> ').format(user_obj['profile_pic'],user_obj['name'],user_obj['email'])
+						+ '<div id="img-info"><img src="{0}" class="rounded span2"></div>'
+						+ '<div> {1} </div>'
+						+ '<div> {2} </div> ' 
+						+ '</div> ').format(user_obj['profile_pic'],user_obj['name'],user_obj['email'])
 					+ '<button id="train-button" class="emerald-flat-button"> Start Training </button>'
 					);
+
+				$('#train-button').click(function(){
+					self.train_with(user_id);
+				});
 			});
 		}
 
 	},"json");
+};
+
+this.train_with = function(user_id){
+
+	$.ajax({
+		url: "/train_with",
+		type: 'POST',
+		async: true,
+		data : {user_id : user_id }
+	}).done(function(data) {
+		if( typeof data === 'string')
+			data = JSON.parse(data);
+		this._alert(data['status']);
+		if(data['status'] == 'Training Complete')
+			location.reload();
+	}.bind(this),"json");
+};
+
+this._alert = function(data){
+	$.Dialog({
+		overlay: true,
+		shadow: true,
+		flat: true,
+		title: 'Alert Box',
+		content: '',
+		padding: 10,
+		onShow: function(_dialog){
+			var content = data
+			+ '<br/>'
+			+ '<button class="button" type="button" onclick="$.Dialog.close()">OK</button> '; 
+			$.Dialog.title("Message");
+			$.Dialog.content(content);
+			$.Metro.initInputs();
+		}
+	});
 };
 
 this.get_users_trained_with = function(){
@@ -265,10 +305,10 @@ this.get_users_trained_with = function(){
 
 				$("#text-users").append(
 					('<div class="notice marker-on-left" id="notice-info">' 
-					+ '<div id="img-info"><img src="{0}" class="rounded span2"></div>'
-					+ '<div> {1} </div>'
-					+ '<div> {2} </div> ' 
-					+ '</div> ').format(user_obj['profile_pic'],user_obj['name'],user_obj['email'])
+						+ '<div id="img-info"><img src="{0}" class="rounded span2"></div>'
+						+ '<div> {1} </div>'
+						+ '<div> {2} </div> ' 
+						+ '</div> ').format(user_obj['profile_pic'],user_obj['name'],user_obj['email'])
 					+ '<div id="all-buttons">'
 					+ '<button id="record-button" class="emerald-flat-button"> Record </button>'
 					+ '<button id="stop-button" class="emerald-flat-button"> Stop </button>'
@@ -281,17 +321,17 @@ this.get_users_trained_with = function(){
 					$('#all-buttons').remove();
 					$('#text-users').append(
 						('<div id="audio-player">'
-						+ '<audio controls="controls">'
-						+ '<source src="{0}" type="audio/wav">'
-						+ 'Your browser does not support audio format.'
-						+ '</audio>'
-						+ '</div>').format("")
-					);
+							+ '<audio controls="controls">'
+							+ '<source src="{0}" type="audio/wav">'
+							+ 'Your browser does not support audio format.'
+							+ '</audio>'
+							+ '</div>').format("")
+						);
 				});	
 			});
-		}
+}
 
-	},"json");
+},"json");
 };	
 
 };
