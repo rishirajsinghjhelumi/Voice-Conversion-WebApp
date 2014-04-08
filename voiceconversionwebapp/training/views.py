@@ -29,18 +29,18 @@ def trainWith(request):
 	if trained:
 		return {'status' : 'Already Trained' }
 
-	currentUserTrainingComplete = DBSession.query(UserProperty.completed_training).\
+	currentUserTrainingComplete = DBSession.query(UserProperty).\
 	filter(UserProperty.user_id == currentUser).\
 	first()
 
-	if currentUserTrainingComplete == False:
+	if currentUserTrainingComplete.completed_training == False:
 		return {'status' : 'You have not completed training. Please do it first!!!!'}
 
-	userTrainingComplete = DBSession.query(UserProperty.completed_training).\
+	userTrainingComplete = DBSession.query(UserProperty).\
 	filter(UserProperty.user_id == userId).\
 	first()
 
-	if userTrainingComplete == False:
+	if userTrainingComplete.completed_training == False:
 		return {'status' : 'The other user has not yet completed training!!!!'}
 
 	trainCouple(currentUser, userId)

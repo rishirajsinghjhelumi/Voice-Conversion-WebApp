@@ -1,4 +1,9 @@
 import os
+import string
+import random
+
+def randomString(size=6, chars=string.ascii_uppercase + string.digits):
+	return ''.join(random.choice(chars) for _ in range(size))
 
 def makeDirectory(directory):
 	if not os.path.exists(directory):
@@ -32,13 +37,30 @@ def initUserDirectories(userId):
 
 def getUserWavDirectory(userId):
 
-	userDirectory = 'static/user_data/user_%s'%(userId)
+	userDirectory = 'user_data/user_%s'%(userId)
 	wavDirectory = os.path.join(userDirectory, 'wav')
 
-	return wavDirectory
+	return os.path.abspath(wavDirectory)
 
 def trainCouple(user1Id, user2Id):
-	pass
+
+	currentDirectory = os.path.abspath(".")
+
+	here = os.path.dirname(os.path.abspath(__file__))
+	userDirectory = 'user_data/user_%s'%(user1Id)
+
+	user1WavDirectory = getUserWavDirectory(user1Id)
+	user2WavDirectory = getUserWavDirectory(user2Id)
+
+	codeDirectory = os.path.join(here, "VC")
+	tempCodeDirectory = os.path.join(userDirectory, "VC_%s"%(user2Id))
+	os.system("cp -r %s %s"%(codeDirectory, tempCodeDirectory))
+	os.system("chmod -R +x %s"%(tempCodeDirectory))
+	os.chdir(tempCodeDirectory)
+
+	os.system("bash training.sh %s %s"%(user1WavDirectory, user2WavDirectory))
+
+	os.chdir(currentDirectory)
 
 def convertUserVoiceToAnother(user1Id, user2Id, speechFile):
 	pass
