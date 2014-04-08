@@ -196,15 +196,15 @@ this._uploadUserVoice = function(user_id) {
 				data = JSON.parse(data);
 			self.speech = data['converted_speech'];
 			$('#notice-info').append(
-						('<div id="audio-player">'
-							+ '<audio controls="controls">'
-							+ '<source src="{0}" type="audio/wav">'
-							+ 'Your browser does not support audio format.'
-							+ '</audio>'
-							+ '<br/>'
-							+ '<a href="{0}" download="{1}" rel="nofollow"> <button class="large primary">Download Speech </button></a>'
-							+ '</div>').format(self.speech['speech_file'], "converted_speech.wav")
-			);
+				('<div id="audio-player">'
+					+ '<audio controls="controls">'
+					+ '<source src="{0}" type="audio/wav">'
+					+ 'Your browser does not support audio format.'
+					+ '</audio>'
+					+ '<br/>'
+					+ '<a href="{0}" download="{1}" rel="nofollow"> <button class="large primary">Download Speech </button></a>'
+					+ '</div>').format(self.speech['speech_file'], "converted_speech.wav")
+				);
 		}
 	});
 };
@@ -222,10 +222,11 @@ this._getNextUnreadParagraphId = function() {
 
 this.initializeUsers = function(){
 	Recorder.initialize({
-			swfSrc: "static/recorder.swf"
-		});	
+		swfSrc: "static/recorder.swf"
+	});	
 	this.get_all_trained_users();
 	this.get_users_trained_with();
+	this.get_converted_speeches();
 	this.speech = null;
 };
 
@@ -374,7 +375,25 @@ this.get_users_trained_with = function(){
 }
 
 },"json");
-};	
+};
+
+
+this.get_converted_speeches = function(){
+
+	var users_url = BASE_URL + "/get_converted_speeches";
+	var self = this;
+
+	$.ajax({
+		url: users_url,
+		type: 'GET',
+		async:false,
+	}).done(function(data) {		
+		if( typeof data === 'string')
+			data = JSON.parse(data);
+		console.log(data);
+	},"json");
+
+};
 
 };
 
