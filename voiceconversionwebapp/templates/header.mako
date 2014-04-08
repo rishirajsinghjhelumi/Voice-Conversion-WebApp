@@ -20,7 +20,7 @@
 				<div class="grid">
 					<div class="row">
 						<div class="span3" style="padding-left:15px;">
-							<a href="/"><img src="static/img/2.jpg" class="span2"/></a>
+							<a href="/"><img src="static/img/logo.png" style="width:100px;"/></a>
 						</div>
 						<div class="span11">
 							<div class="heading" style="position:relative;padding-top:12px;font-size:55px;">Voice Conversion</div>
