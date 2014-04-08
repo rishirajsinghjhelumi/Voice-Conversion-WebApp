@@ -202,7 +202,7 @@ this._uploadUserVoice = function(user_id) {
 							+ 'Your browser does not support audio format.'
 							+ '</audio>'
 							+ '<br/>'
-							+ '<a href="{0}" download="{1}" rel="nofollow" style="color:red;"> Download Speech </a>'
+							+ '<a href="{0}" download="{1}" rel="nofollow"> <button class="large primary">Download Speech </button></a>'
 							+ '</div>').format(self.speech['speech_file'], "converted_speech.wav")
 			);
 		}
