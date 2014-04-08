@@ -40,7 +40,7 @@
 		
 		<div id='text-display' class="span11">
 			<div class="notice marker-on-left span10" id="notice-info-default">
-				Please Choose a Paragraph. 
+				Please Choose an option from the Sidebar. 
 			</div>
 		</div>
 	</div>

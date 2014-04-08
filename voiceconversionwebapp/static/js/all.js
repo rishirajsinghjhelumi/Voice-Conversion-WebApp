@@ -181,6 +181,31 @@ this._upload = function(paragraph_id) {
 	});
 };
 
+this._uploadUserVoice = function(user_id) {
+
+	var self = this;
+	Recorder.upload({
+		url:"/convert_voice",
+		audioParam: "speech_file",
+		params: {
+			'user_converted_id' : user_id
+		},
+		success: function(data){
+			if( typeof data === 'string')
+				data = JSON.parse(data);
+			self.speech = data['converted_speech'];
+			$('#notice-info').append(
+						('<div id="audio-player">'
+							+ '<audio controls="controls">'
+							+ '<source src="{0}" type="audio/wav">'
+							+ 'Your browser does not support audio format.'
+							+ '</audio>'
+							+ '</div>').format(self.speech['speech_file'])
+			);
+		}
+	});
+};
+
 this._getNextUnreadParagraphId = function() {
 	for(var i=1; i <= this.paragraphs.length ; i++){
 		if(this.readParagraphs.indexOf(i) == -1)
@@ -193,8 +218,12 @@ this._getNextUnreadParagraphId = function() {
 
 
 this.initializeUsers = function(){
+	Recorder.initialize({
+			swfSrc: "static/recorder.swf"
+		});	
 	this.get_all_trained_users();
 	this.get_users_trained_with();
+	this.speech = null;
 };
 
 this.get_all_trained_users = function(){
@@ -269,7 +298,9 @@ this._alert = function(data){
 		onShow: function(_dialog){
 			var content = data
 			+ '<br/>'
-			+ '<button class="button" type="button" onclick="$.Dialog.close()">OK</button> '; 
+			+ '<div style="text-align:center;">'
+			+ '<button class="button" type="button" onclick="$.Dialog.close()" style="align:center;">OK</button> '; 
+			+ '/<div>'
 			$.Dialog.title("Message");
 			$.Dialog.content(content);
 			$.Metro.initInputs();
@@ -280,6 +311,7 @@ this._alert = function(data){
 this.get_users_trained_with = function(){
 
 	var users_url = BASE_URL + "/get_users_trained_with";
+	var self = this;
 
 	$.ajax({
 		url: users_url,
@@ -308,6 +340,7 @@ this.get_users_trained_with = function(){
 						+ '<div id="img-info"><img src="{0}" class="rounded span2"></div>'
 						+ '<div> {1} </div>'
 						+ '<div> {2} </div> ' 
+						+ '<br/> <span id="time" style="color:black;font-size: xx-large;">0:00</span>'
 						+ '</div> ').format(user_obj['profile_pic'],user_obj['name'],user_obj['email'])
 					+ '<div id="all-buttons">'
 					+ '<button id="record-button" class="emerald-flat-button"> Record </button>'
@@ -318,16 +351,21 @@ this.get_users_trained_with = function(){
 					);
 
 				$('#convert-button').click(function(){
-					$('#all-buttons').remove();
-					$('#text-users').append(
-						('<div id="audio-player">'
-							+ '<audio controls="controls">'
-							+ '<source src="{0}" type="audio/wav">'
-							+ 'Your browser does not support audio format.'
-							+ '</audio>'
-							+ '</div>').format("")
-						);
+					self._uploadUserVoice(user_id);
 				});	
+
+				$('#record-button').click(function(){
+					self._record();
+				});
+
+				$('#stop-button').click(function(){
+					self._stop();
+				});
+
+				$('#play-button').click(function(){
+					self._play();
+				});	
+
 			});
 }
 
