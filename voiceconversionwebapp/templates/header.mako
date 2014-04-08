@@ -23,7 +23,7 @@
 							<a href="/"><img src="static/img/logo.png" style="width:100px;"/></a>
 						</div>
 						<div class="span11">
-							<div class="heading" style="position:relative;padding-top:12px;font-size:55px;">Voice Conversion</div>
+							<div class="heading" style="position:relative;padding-top:12px;font-size:55px;"><a href="/" style="color:white;">Voice Conversion</a></div>
 						</div>
 						% if 'user' in request.session:
 						<div class="span1" id="training-button" style="padding-top:20px;">
