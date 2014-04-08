@@ -196,15 +196,16 @@ this._uploadUserVoice = function(user_id) {
 				data = JSON.parse(data);
 			self.speech = data['converted_speech'];
 			$('#notice-info').append(
-				('<div id="audio-player">'
-					+ '<audio controls="controls">'
-					+ '<source src="{0}" type="audio/wav">'
-					+ 'Your browser does not support audio format.'
-					+ '</audio>'
-					+ '<br/>'
+				('<br/><br/>' 
+				    + '<div id="audio-player" style="text-align: -webkit-center;">'
+					+ '<audio src="{0}" preload="auto"></audio>'
+					+ '</div>'
 					+ '<a href="{0}" download="{1}" rel="nofollow"> <button class="large primary">Download Speech </button></a>'
 					+ '</div>').format(self.speech['speech_file'], "converted_speech.wav")
 				);
+			audiojs.events.ready(function() {
+				    var as = audiojs.createAll();
+			});
 		}
 	});
 };
@@ -259,7 +260,7 @@ this.get_all_trained_users = function(){
 
 				$("#text-users").append(
 					('<div class="notice marker-on-left" id="notice-info">' 
-						+ '<div id="img-info"><img src="{0}" class="rounded span2"></div>'
+						+ '<div id="img-info"><img src="{0}" class="span2" style="width:100px;height:100px;"></div>'
 						+ '<div> {1} </div>'
 						+ '<div> {2} </div> ' 
 						+ '</div> ').format(user_obj['profile_pic'],user_obj['name'],user_obj['email'])
@@ -342,7 +343,7 @@ this.get_users_trained_with = function(){
 
 				$("#text-users").append(
 					('<div class="notice marker-on-left" id="notice-info">' 
-						+ '<div id="img-info"><img src="{0}" class="rounded span2"></div>'
+						+ '<div id="img-info"><img src="{0}" class="span2" style="width:100px;height:100px;"></div>'
 						+ '<div> {1} </div>'
 						+ '<div> {2} </div> ' 
 						+ '<br/> <span id="time" style="color:black;font-size: xx-large;">0:00</span>'
@@ -410,20 +411,20 @@ this.get_converted_speeches = function(){
 
 				$("#text-users").append(
 					('<div class="notice marker-on-left" id="notice-info">' 
-						+ '<div id="img-info"><img src="{0}" class="rounded span2"></div>'
+						+ '<div id="img-info"><img src="{0}" class="span2" style="width:100px;height:100px;"></div>'
 						+ '<div> {1} </div>'
-						+ '<div> {2} </div> ' 
-					    + '<div id="audio-player">'
-					+ '<audio controls="controls">'
-					+ '<source src="{3}" type="audio/wav">'
-					+ 'Your browser does not support audio format.'
-					+ '</audio>'
-					+ '<br/>'
-					+ '<a href="{3}" download="{4}" rel="nofollow"> <button class="large primary">Download Speech </button></a>'
-					+ '</div>'
-					+ '</div> ').format(speech_obj['user_converted']['profile_pic'],speech_obj['user_converted']['name'],
-					speech_obj['user_converted']['email'],speech_obj['speech_file'],"converted_speech.wav")
+						+ '<div> {2} </div> '
+						+ '<br/><br/>' 
+					    + '<div id="audio-player" style="text-align: -webkit-center;">'
+						+ '<audio src="{3}" preload="auto"></audio>'
+						+ '</div>'
+						+ '<a href="{3}" download="{4}" rel="nofollow"> <button class="large primary">Download Speech </button></a>'
+						+ '</div> ').format(speech_obj['user_converted']['profile_pic'],speech_obj['user_converted']['name'],
+						speech_obj['user_converted']['email'],speech_obj['speech_file'],"converted_speech.wav")
 				);
+				audiojs.events.ready(function() {
+				    var as = audiojs.createAll();
+				});
 			});
 		}
 	},"json");

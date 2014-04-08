@@ -9,6 +9,7 @@
 	<script src="static/js/jquery.widget.min.js"></script>
 	<script src="static/min/metro.min.js"></script>
 	<script src="static/js/recorder.js"></script>
+	<script src="static/js/audiojs/audio.min.js"></script>
 	<script src="static/js/all.js"></script>
 </head>
 
