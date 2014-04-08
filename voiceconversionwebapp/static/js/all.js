@@ -107,7 +107,7 @@ var VC = function(){
 					self.readParagraphs.push(parseInt(paragraph_id));
 					var nextUnreadParagraphId = self._getNextUnreadParagraphId();
 					if(nextUnreadParagraphId == -1){
-						alert('Training Complete');
+						self._alert('Training Complete');
 						window.location.href = '/';
 					}
 					$('#paragraph_' + nextUnreadParagraphId).click();
@@ -161,6 +161,7 @@ this._stop = function() {
 this._upload = function(paragraph_id) {
 
 	paragraph_id = parseInt(paragraph_id);
+	var self = this;
 
 	Recorder.upload({
 		url:"/user/paragraphs/update",
@@ -175,9 +176,9 @@ this._upload = function(paragraph_id) {
 				$('#paragraph_' + paragraph_id).attr('class', 'list_paragraph_read');
 			}
 			else{
-				alert(data['status']);
+				self._alert(data['status']);
 			}
-		}.bind(this)
+		}
 	});
 };
 
@@ -200,7 +201,9 @@ this._uploadUserVoice = function(user_id) {
 							+ '<source src="{0}" type="audio/wav">'
 							+ 'Your browser does not support audio format.'
 							+ '</audio>'
-							+ '</div>').format(self.speech['speech_file'])
+							+ '<br/>'
+							+ '<a href="{0}" download="{1}" rel="nofollow" style="color:red;"> Download Speech </a>'
+							+ '</div>').format(self.speech['speech_file'], "converted_speech.wav")
 			);
 		}
 	});
