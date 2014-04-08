@@ -13,9 +13,7 @@ def saveUserParagraph(userId, paragraphId, speechFile):
 	
 	file_path = "user_data/user_%s/wav/paragraph_%s.wav"%(userId, paragraphId)
 	input_file = speechFile.file
-
 	output_file = open(file_path, 'wb')
-
 	input_file.seek(0)
 	while True:
 		data = input_file.read(2<<16)
@@ -63,4 +61,37 @@ def trainCouple(user1Id, user2Id):
 	os.chdir(currentDirectory)
 
 def convertUserVoiceToAnother(user1Id, user2Id, speechFile):
-	pass
+
+	currentDirectory = os.path.abspath(".")
+
+	userDirectory = 'user_data/user_%s'%(user1Id)
+	codeDirectory = os.path.join(userDirectory, "VC_%s"%(user2Id))
+	convertedWavDirectory = os.path.join(userDirectory, "converted")
+	user2WavDirectory = getUserWavDirectory(user2Id)
+
+	randomFileName = randomString(15)
+	randomTestDirectory = os.path.join(userDirectory, randomFileName)
+	makeDirectory(randomTestDirectory)
+
+	user1TestWavDirectory = os.path.abspath(randomTestDirectory)
+
+	file_path = os.path.join(randomTestDirectory, "test_%s.wav"%(randomFileName))
+	input_file = speechFile.file
+	output_file = open(file_path, 'wb')
+	input_file.seek(0)
+	while True:
+		data = input_file.read(2<<16)
+		if not data:
+		    break
+		output_file.write(data)
+	output_file.close()
+
+	os.chdir(codeDirectory)
+	os.system("bash testing.sh %s %s"%(user1TestWavDirectory, user2WavDirectory))
+	os.chdir(currentDirectory)
+
+	convertedFilePath = os.path.join(convertedWavDirectory, randomFileName + ".wav")
+	os.system("mv %s/Speaker_B_Predicted.wav %s"%(codeDirectory, convertedFilePath))
+	os.system("rm -rf %s"%(user1TestWavDirectory))
+	
+	return convertedFilePath
