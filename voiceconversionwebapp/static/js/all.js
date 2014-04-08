@@ -355,6 +355,7 @@ this.get_users_trained_with = function(){
 				});	
 
 				$('#record-button').click(function(){
+					$("#audio-player").remove();
 					self._record();
 				});
 

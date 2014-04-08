@@ -94,4 +94,4 @@ def convertUserVoiceToAnother(user1Id, user2Id, speechFile):
 	os.system("mv %s/Speaker_B_Predicted.wav %s"%(codeDirectory, convertedFilePath))
 	os.system("rm -rf %s"%(user1TestWavDirectory))
 	
-	return convertedFilePath
+	return os.path.join("static", convertedFilePath)
