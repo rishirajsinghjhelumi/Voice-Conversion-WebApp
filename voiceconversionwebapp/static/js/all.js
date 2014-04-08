@@ -338,6 +338,7 @@ this.get_users_trained_with = function(){
 
 				var user_id = $(this).attr('id').split("trained_user_")[1];
 				var user_obj = $.grep(users, function(e){ return e.id == user_id; })[0];
+				// console.log(user_obj);
 
 				$("#text-users").append(
 					('<div class="notice marker-on-left" id="notice-info">' 
@@ -377,7 +378,6 @@ this.get_users_trained_with = function(){
 },"json");
 };
 
-
 this.get_converted_speeches = function(){
 
 	var users_url = BASE_URL + "/get_converted_speeches";
@@ -390,10 +390,42 @@ this.get_converted_speeches = function(){
 	}).done(function(data) {		
 		if( typeof data === 'string')
 			data = JSON.parse(data);
-		console.log(data);
+		// console.log(data);
+
+		var speeches = data['speeches'];
+
+		for (var i = 0; i < speeches.length; i++) {
+			var speech_id = speeches[i]["id"];
+			// console.log(user);
+
+			$("#converted_voices").append('<li class="converted_voices" id="voice_converted_{0}">Speech {0}</li>'.format(speech_id) );
+			$('#voice_converted_' + speech_id).click(function() {
+
+				$('#text-users').remove();
+				$('#notice-info-default').remove();
+				$('#text-display').append('<div id="text-users"></div>');
+
+				var speech_id = $(this).attr('id').split("voice_converted_")[1];
+				var speech_obj = $.grep(speeches, function(e){ return e.id == speech_id;})[0];
+
+				$("#text-users").append(
+					('<div class="notice marker-on-left" id="notice-info">' 
+						+ '<div id="img-info"><img src="{0}" class="rounded span2"></div>'
+						+ '<div> {1} </div>'
+						+ '<div> {2} </div> ' 
+					    + '<div id="audio-player">'
+					+ '<audio controls="controls">'
+					+ '<source src="{3}" type="audio/wav">'
+					+ 'Your browser does not support audio format.'
+					+ '</audio>'
+					+ '<br/>'
+					+ '<a href="{3}" download="{4}" rel="nofollow"> <button class="large primary">Download Speech </button></a>'
+					+ '</div>'
+					+ '</div> ').format(speech_obj['user_converted']['profile_pic'],speech_obj['user_converted']['name'],
+					speech_obj['user_converted']['email'],speech_obj['speech_file'],"converted_speech.wav")
+				);
+			});
+		}
 	},"json");
-
 };
-
 };
-

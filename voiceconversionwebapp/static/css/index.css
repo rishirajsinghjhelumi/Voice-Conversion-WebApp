@@ -156,6 +156,11 @@ body {
 	height: inherit;
 }
 
+#converted_voices{
+	overflow: auto;
+	height: inherit;
+}
+
 .list_paragraph_unread {
 	padding: 10px 10px 5px 10px;
 	font-size: 17px;
@@ -228,6 +233,26 @@ li.users_trained_with:active {
 }
 
 .users_trained_with {
+	padding: 10px 10px 5px 10px;
+	text-align: center;
+	font-size: 17px;
+	background-color: #27ae60;
+}
+
+li.converted_voices:hover {
+	background:#0B610B;
+	color: #ffffff;
+}
+
+li.converted_voices:active {
+	background: grey;
+	color: #ffffff;
+	outline: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+.converted_voices {
 	padding: 10px 10px 5px 10px;
 	text-align: center;
 	font-size: 17px;

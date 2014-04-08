@@ -30,7 +30,7 @@
 			        <a href="#" class="heading">Converted Voices</a>
 			        <div class="content">
 				        <nav class="sidebar (light)">
-				        	<ul id="converted voices" class="accordian-list" >						    
+				        	<ul id="converted_voices" class="accordian-list" >						    
 							</ul>
 						</nav>
 			        </div>
