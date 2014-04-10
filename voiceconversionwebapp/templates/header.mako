@@ -8,11 +8,11 @@
 	<script src="static/js/jquery-1.11.0.min.js"></script>
 	<script src="static/js/jquery.widget.min.js"></script>
 	<script src="static/min/metro.min.js"></script>
+	<script src="static/nprogress/nprogress.js"></script>
+  	<link href="static/nprogress/nprogress.css" rel="stylesheet" />
 	<script src="static/js/recorder.js"></script>
 	<script src="static/js/audiojs/audio.min.js"></script>
 	<script src="static/js/all.js"></script>
-	<script src="static/pace/pace.min.js"></script>
-  	<link href="static/pace/themes/pace-theme-flash.css" rel="stylesheet" />
 </head>
 
 <body class="metro">

@@ -277,7 +277,8 @@ this.get_all_trained_users = function(){
 };
 
 this.train_with = function(user_id){
-
+	
+	NProgress.start();
 	$.ajax({
 		url: "/train_with",
 		type: 'POST',
@@ -287,6 +288,7 @@ this.train_with = function(user_id){
 		if( typeof data === 'string')
 			data = JSON.parse(data);
 		this._alert(data['status']);
+		NProgress.done();
 		if(data['status'] == 'Training Complete')
 			location.reload();
 	}.bind(this),"json");
