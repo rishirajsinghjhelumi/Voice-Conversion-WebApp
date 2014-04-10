@@ -17,12 +17,14 @@ var VC = function(){
 	/* Paragraphs */
 
 	this.initializeParagraphs = function(){
+		NProgress.start();
 		Recorder.initialize({
 			swfSrc: "static/recorder.swf"
 		});
 		this.get_user_read_paragraphs();
 		this.get_paragraphs();
 		this.initParagraphList();
+		NProgress.done();
 	};
 
 	this.get_paragraphs = function (){
@@ -163,6 +165,8 @@ this._upload = function(paragraph_id) {
 	paragraph_id = parseInt(paragraph_id);
 	var self = this;
 
+	NProgress.start();
+
 	Recorder.upload({
 		url:"/user/paragraphs/update",
 		audioParam: "speech_file",
@@ -178,6 +182,8 @@ this._upload = function(paragraph_id) {
 			else{
 				self._alert(data['status']);
 			}
+
+			NProgress.done();
 		}
 	});
 };
@@ -185,6 +191,7 @@ this._upload = function(paragraph_id) {
 this._uploadUserVoice = function(user_id) {
 
 	var self = this;
+	NProgress.start();
 	Recorder.upload({
 		url:"/convert_voice",
 		audioParam: "speech_file",
@@ -206,6 +213,7 @@ this._uploadUserVoice = function(user_id) {
 			audiojs.events.ready(function() {
 				    var as = audiojs.createAll();
 			});
+			NProgress.done();
 		}
 	});
 };
@@ -222,6 +230,7 @@ this._getNextUnreadParagraphId = function() {
 
 
 this.initializeUsers = function(){
+	NProgress.start();
 	Recorder.initialize({
 		swfSrc: "static/recorder.swf"
 	});	
@@ -229,6 +238,7 @@ this.initializeUsers = function(){
 	this.get_users_trained_with();
 	this.get_converted_speeches();
 	this.speech = null;
+	NProgress.done();
 };
 
 this.get_all_trained_users = function(){
