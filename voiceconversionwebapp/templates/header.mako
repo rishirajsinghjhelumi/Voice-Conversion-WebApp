@@ -11,6 +11,8 @@
 	<script src="static/js/recorder.js"></script>
 	<script src="static/js/audiojs/audio.min.js"></script>
 	<script src="static/js/all.js"></script>
+	<script src="static/pace/pace.min.js"></script>
+  	<link href="static/pace/themes/pace-theme-flash.css" rel="stylesheet" />
 </head>
 
 <body class="metro">
