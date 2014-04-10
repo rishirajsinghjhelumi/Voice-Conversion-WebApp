@@ -287,6 +287,7 @@ this.get_all_trained_users = function(){
 
 this.train_with = function(user_id){
 	
+	NProgress.configure({ ease: 'ease', speed: 2 });
 	NProgress.start();
 	$.ajax({
 		url: "/train_with",
