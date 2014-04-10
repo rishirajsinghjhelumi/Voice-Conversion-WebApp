@@ -110,7 +110,6 @@ var VC = function(){
 					var nextUnreadParagraphId = self._getNextUnreadParagraphId();
 					if(nextUnreadParagraphId == -1){
 						self._alert('Training Complete');
-						window.location.href = '/';
 					}
 					$('#paragraph_' + nextUnreadParagraphId).click();
 				});	
