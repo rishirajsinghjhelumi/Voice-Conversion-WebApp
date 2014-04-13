@@ -413,7 +413,7 @@ this.get_converted_speeches = function(){
 			var speech_id = speeches[i]["id"];
 			// console.log(user);
 
-			$("#converted_voices").append('<li class="converted_voices" id="voice_converted_{0}">Speech {0}</li>'.format(speech_id) );
+			$("#converted_voices").append('<li class="converted_voices" id="voice_converted_{0}">Speech {1}</li>'.format(speech_id, i+1) );
 			$('#voice_converted_' + speech_id).click(function() {
 
 				$('#text-users').remove();
