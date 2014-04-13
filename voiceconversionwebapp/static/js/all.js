@@ -202,12 +202,14 @@ this._uploadUserVoice = function(user_id) {
 				data = JSON.parse(data);
 			self.speech = data['converted_speech'];
 			$('#notice-info').append(
-				('<br/><br/>' 
-				    + '<div id="audio-player" style="text-align: -webkit-center;">'
+				('<div id="audio-player">'
+					+ '<br/>'
+				    + '<div style="text-align: -webkit-center;">'
 					+ '<audio src="{0}" preload="auto"></audio>'
 					+ '</div>'
+					+ '<div>'
 					+ '<a href="{0}" download="{1}" rel="nofollow"> <button class="large primary">Download Speech </button></a>'
-					+ '</div>').format(self.speech['speech_file'], "converted_speech.wav")
+					+ '</div></div>').format(self.speech['speech_file'], "converted_speech.wav")
 				);
 			audiojs.events.ready(function() {
 				    var as = audiojs.createAll();
