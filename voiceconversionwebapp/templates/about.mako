@@ -68,7 +68,7 @@
 					<span>Assistant Professor</span>	</br/>
 					<span style="font-style:italic;">IIIT Hyderabad	</span>	</br/>
 					<span style="font-style:italic;font-weight:bold;">PhD, IIT Madras</span>	</br/>
-					<span><u>email</u> : kishore@iiit.ac.in  </span>
+					<span><u>email</u> : svg@iiit.ac.in </span>
 					</div>
 				</div>
 
