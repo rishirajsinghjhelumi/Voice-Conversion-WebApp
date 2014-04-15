@@ -9,6 +9,19 @@ def makeDirectory(directory):
 	if not os.path.exists(directory):
 		os.makedirs(directory)
 
+def noiseReduction(wavFile):
+
+	wavFile = os.path.abspath(wavFile)
+
+	currentDirectory = os.path.abspath(".")
+	noiseReductionCodeDirectory = "Noise_Reduction"
+
+	os.chdir(noiseReductionCodeDirectory)
+
+	os.system('octave --silent --eval "noise_reduction(\'%s\')"'%(wavFile))
+
+	os.chdir(currentDirectory)
+
 def saveUserParagraph(userId, paragraphId, speechFile):
 	
 	file_path = "user_data/user_%s/wav/paragraph_%s.wav"%(userId, paragraphId)
@@ -22,6 +35,8 @@ def saveUserParagraph(userId, paragraphId, speechFile):
 		output_file.write(data)
 
 	output_file.close()
+
+	noiseReduction(file_path)
 
 def initUserDirectories(userId):
 	
@@ -85,6 +100,8 @@ def convertUserVoiceToAnother(user1Id, user2Id, speechFile):
 		    break
 		output_file.write(data)
 	output_file.close()
+
+	noiseReduction(file_path)
 
 	os.chdir(codeDirectory)
 	os.system("bash testing.sh %s %s"%(user1TestWavDirectory, user2WavDirectory))
