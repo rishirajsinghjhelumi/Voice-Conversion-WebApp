@@ -19,6 +19,7 @@ def noiseReduction(wavFile):
 	os.chdir(noiseReductionCodeDirectory)
 
 	os.system('octave --silent --eval "noise_reduction(\'%s\')"'%(wavFile))
+	os.system('octave --silent --eval "silenceRemoval(\'%s\')"'%(wavFile))
 
 	os.chdir(currentDirectory)
 
