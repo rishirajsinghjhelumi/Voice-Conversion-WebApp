@@ -2,6 +2,8 @@ import os
 import string
 import random
 
+from multiprocessing import Pool
+
 def randomString(size=6, chars=string.ascii_uppercase + string.digits):
 	return ''.join(random.choice(chars) for _ in range(size))
 
@@ -16,12 +18,16 @@ def noiseReduction(wavFile):
 	currentDirectory = os.path.abspath(".")
 	noiseReductionCodeDirectory = "Noise_Reduction"
 
-	os.chdir(noiseReductionCodeDirectory)
+	def runNoiseReduction():
+		os.chdir(noiseReductionCodeDirectory)
+		os.system('octave --silent --eval "noise_reduction(\'%s\')"'%(wavFile))
+		os.system('octave --silent --eval "silenceRemoval(\'%s\')"'%(wavFile))
+		os.chdir(currentDirectory)
 
-	os.system('octave --silent --eval "noise_reduction(\'%s\')"'%(wavFile))
-	os.system('octave --silent --eval "silenceRemoval(\'%s\')"'%(wavFile))
-
-	os.chdir(currentDirectory)
+	pool = Pool(maxtasksperchild = 1)
+	pool.map(runNoiseReduction, [])
+	pool.close()
+	pool.join()
 
 def saveUserParagraph(userId, paragraphId, speechFile):
 	
@@ -70,11 +76,16 @@ def trainCouple(user1Id, user2Id):
 	tempCodeDirectory = os.path.join(userDirectory, "VC_%s"%(user2Id))
 	os.system("cp -r %s %s"%(codeDirectory, tempCodeDirectory))
 	os.system("chmod -R +x %s"%(tempCodeDirectory))
-	os.chdir(tempCodeDirectory)
 
-	os.system("bash training.sh %s %s"%(user1WavDirectory, user2WavDirectory))
+	def runTraining():
+		os.chdir(tempCodeDirectory)
+		os.system("bash training.sh %s %s"%(user1WavDirectory, user2WavDirectory))
+		os.chdir(currentDirectory)
 
-	os.chdir(currentDirectory)
+	pool = Pool(maxtasksperchild = 1)
+	pool.map(runTraining, [])
+	pool.close()
+	pool.join()
 
 def convertUserVoiceToAnother(user1Id, user2Id, speechFile):
 
@@ -104,9 +115,15 @@ def convertUserVoiceToAnother(user1Id, user2Id, speechFile):
 
 	noiseReduction(file_path)
 
-	os.chdir(codeDirectory)
-	os.system("bash testing.sh %s %s"%(user1TestWavDirectory, user2WavDirectory))
-	os.chdir(currentDirectory)
+	def runTesting():
+		os.chdir(codeDirectory)
+		os.system("bash testing.sh %s %s"%(user1TestWavDirectory, user2WavDirectory))
+		os.chdir(currentDirectory)
+
+	pool = Pool(maxtasksperchild = 1)
+	pool.map(runTesting, [])
+	pool.close()
+	pool.join()
 
 	convertedFilePath = os.path.join(convertedWavDirectory, randomFileName + ".wav")
 	os.system("mv %s/Speaker_B_Predicted.wav %s"%(codeDirectory, convertedFilePath))
